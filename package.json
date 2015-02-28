@@ -1,0 +1,42 @@
+{
+  "name": "dapper-filemanager",
+  "version": "0.0.1",
+  "description": "Managing files from the directory the command is run from",
+  "main": "./lib/index.js",
+  "bin": {
+    "dfiles": "bin/dfiles.js"
+  },
+  "scripts": {
+    "test": "npm bin/test.js"
+  },
+  "preferGlobal": "true",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mistermark/file-manager.git"
+  },
+  "keywords": [
+    "files",
+    "manager",
+    "dapper"
+  ],
+  "author": "Mark de Jong",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mistermark/file-manager/issues"
+  },
+  "homepage": "https://github.com/mistermark/file-manager",
+  "dependencies": {
+    "chalk": "^1.0.0",
+    "cli-color": "^0.3.2",
+    "commander": "^2.6.0",
+    "find-remove": "^0.2.5",
+    "inquirer": "^0.8.0",
+    "underscore": "^1.8.2"
+  },
+  "devDependencies": {
+    "async": "^0.9.0",
+    "chai": "^2.1.0",
+    "mkdirp": "^0.5.0",
+    "mocha": "^2.1.0"
+  }
+}
