@@ -25,27 +25,64 @@ describe('dfiles', function() {
 
     });
 
-    it.only('test_1', function(done) {
-        var steps = [];;
+    it('test_1', function(done) {
+        var steps = [];
         var exec = spawn('node', ['bin/test_1'], {
           // cwd: path.join(__dirname, '..')
         });
 
         exec.stdout.on('data', function(chunk) {
             chunk = chunk.toString('utf8');
-            // chunk = readline.stripVTControlCharacters(chunk);
+            chunk = readline.stripVTControlCharacters(chunk);
             steps.push(chunk);
         });
 
         exec.stdout.on('end', function(chunk) {
-            // console.dir(steps)
-            steps[6].should.be.eql('ciao');
+            console.dir(steps);
+            steps[6].should.be.eql('hello world');
             done();
         });
 
         setTimeout(function () {
-          exec.stdin.write('ciao');
+          exec.stdin.write('hello world');
           exec.stdin.end();
+        }, 1000);
+
+    });
+
+
+    it.only('test_2', function(done) {
+        var steps = [];
+        var exec = spawn('node', ['bin/test_2'], {
+          // cwd: path.join(__dirname, '..')
+        });
+
+        exec.stdout.on('data', function(chunk) {
+            chunk = chunk.toString('utf8');
+            chunk = readline.stripVTControlCharacters(chunk);
+            steps.push(chunk);
+        });
+
+        exec.stdout.on('end', function(chunk) {
+
+            console.log('STEPS: ', steps);
+            // steps[6].should.be.eql('a');
+            // done();
+        });
+
+        // exec.stderr.on('data', function(err) {
+        //     console.error(err);
+        //     done();
+        // });
+
+        setTimeout(function () {
+        //   exec.stdin.write('3');
+            exec.stdin.emit("keypress", " ", { name: "space" });
+            // exec.stdin.emit("keypress", null, { name: "down" });
+            // exec.stdin.emit("keypress", " ", { name: "space" });
+            exec.stdin.emit("keypress", null, { name: "enter" });
+            // exec.stdin.emit("line");
+            exec.stdin.end();
         }, 1000);
 
     });

@@ -1,22 +1,37 @@
 #!/usr/bin/env node
-
+// process.stdin.resume();
+// process.stdin.setRawMode(false);
 
 var inquirer = require('inquirer');
 
 var options = {
     type: "checkbox",
-    name: "dirs",
+    name: "ret",
     message: 'MESSAGE',
     choices: [
-      '1',
-      '2',
-      '3'
+      'a',
+      'b',
+      'c',
+      'd',
+      'e',
+      'f'
     ]
 };
 
 inquirer.prompt(options, function(answers) {
-  console.log('*********', answers)
+  // console.log('*********', answers);
+
+  process.stdout.write('>>>>>> '+ answers.ret);
 });
+
+
+setTimeout(function () {
+    process.stdin.emit("keypress", " ", { name: "space" });
+    process.stdin.emit("keypress", null, { name: "down" });
+    process.stdin.emit("keypress", " ", { name: "space" });
+    // process.stdin.emit("keypress", null, { name: "enter" });
+    // process.stdin.end();
+}, 2000);
 
 // console.log('Hello');
 
