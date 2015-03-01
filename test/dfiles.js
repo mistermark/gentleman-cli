@@ -12,13 +12,13 @@ describe('dfiles', function() {
         var exec = spawn('dfiles', ["delete", "movies"]);
 
         exec.stdout.on('data', function(chunk) {
-            console.log(typeof chunk);
+            emitKey(exec.stdin, 'down');
+
             console.log(chunk.toString());
-            // emitKey(exec.stdin, 'down');
         });
 
         exec.stdin.write('data', function(chunk) {
-            console.log(chunk.toString());
+            // console.log(chunk.toString());
         });
 
         exec.on('close', function(){
