@@ -1,13 +1,13 @@
 {
-  "name": "dapper-filemanager",
+  "name": "dapper-media-manager",
   "version": "0.0.1",
-  "description": "Managing files from the directory the command is run from",
-  "main": "./lib/index.js",
+  "description": "Managing media files from the command line. Like a dapperman.",
+  "main": "./bin/index.js",
   "bin": {
     "dfiles": "bin/dfiles.js"
   },
   "scripts": {
-    "test": "npm bin/test.js"
+    "test": "make test"
   },
   "preferGlobal": "true",
   "repository": {
@@ -31,6 +31,7 @@
     "commander": "^2.6.0",
     "find-remove": "^0.2.5",
     "inquirer": "^0.8.0",
+    "nconf": "^0.7.1",
     "underscore": "^1.8.2"
   },
   "devDependencies": {
