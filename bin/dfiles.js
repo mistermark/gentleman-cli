@@ -1,16 +1,15 @@
 #!/usr/bin/env node
 
-var path = require('path'),
-    program = require('commander'),
-    inquirer = require('inquirer'),
-    config = require('../lib/config'),
-    osenv = require('osenv'),
-    ls = require('../lib/list'),
-    notify = require('../lib/notify'),
-    first = require('../lib/first'),
-    remove = require('../lib/remove');
+var program     = require('commander'),
+    inquirer    = require('inquirer'),
+    osenv       = require('osenv'),
+    config      = require('../lib/config'),
+    ls          = require('../lib/list'),
+    notify      = require('../lib/notify'),
+    first       = require('../lib/first'),
+    remove      = require('../lib/remove');
 
-// var settings = require('../config'),
+
 var messages = require('../lib/messages');
 var firstRun = function() {
     first.check(function(res) {
@@ -28,7 +27,7 @@ program
         console.log('  Examples:');
         console.log('');
         console.log('    $ dfiles delete movies');
-        // console.log('    $ dfiles move series'); //@TODO
+        // console.log('    $ dfiles move series'); //@TODO: 
         console.log('');
     });
 
