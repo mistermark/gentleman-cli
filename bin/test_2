@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+
+var inquirer = require('inquirer');
+
+var options = {
+    type: "checkbox",
+    name: "dirs",
+    message: 'MESSAGE',
+    choices: [
+      '1',
+      '2',
+      '3'
+    ]
+};
+
+inquirer.prompt(options, function(answers) {
+  console.log('*********', answers)
+});
+
+// console.log('Hello');
+
+// process.stdin.on('data', function (chunk) {
+//   console.log('-------', chunk);
+// })

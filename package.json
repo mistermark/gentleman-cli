@@ -31,7 +31,9 @@
     "commander": "^2.6.0",
     "find-remove": "^0.2.5",
     "inquirer": "^0.8.0",
+    "mkdirp": "^0.5.0",
     "nconf": "^0.7.1",
+    "osenv": "^0.1.0",
     "underscore": "^1.8.2"
   },
   "devDependencies": {

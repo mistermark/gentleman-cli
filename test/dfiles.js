@@ -3,7 +3,11 @@
 //     escape = scapegoat.escape,
 //     unescape = scapegoat.unescape;
 
+var path = require('path');
+var should = require('should');
+var readline = require('readline');
 var spawn = require('child_process').spawn;
+
 
 describe('dfiles', function() {
 
@@ -12,18 +16,37 @@ describe('dfiles', function() {
         var exec = spawn('dfiles', ["delete", "movies"]);
 
         exec.stdout.on('data', function(chunk) {
-            emitKey(exec.stdin, 'down');
-
+            exec.stdout.write('ssss');
             console.log(chunk.toString());
+            exec.stdin.resume()
         });
 
-        exec.stdin.write('data', function(chunk) {
-            // console.log(chunk.toString());
+        exec.stdin.write('data');
+
+    });
+
+    it.only('test_1', function(done) {
+        var steps = [];;
+        var exec = spawn('node', ['bin/test_1'], {
+          // cwd: path.join(__dirname, '..')
         });
 
-        exec.on('close', function(){
+        exec.stdout.on('data', function(chunk) {
+            chunk = chunk.toString('utf8');
+            // chunk = readline.stripVTControlCharacters(chunk);
+            steps.push(chunk);
+        });
+
+        exec.stdout.on('end', function(chunk) {
+            // console.dir(steps)
+            steps[6].should.be.eql('ciao');
             done();
         });
+
+        setTimeout(function () {
+          exec.stdin.write('ciao');
+          exec.stdin.end();
+        }, 1000);
 
     });
 
@@ -105,6 +128,7 @@ function emitKey(stream, s) {
     key.shift = /^[A-Z]$/.test(parts[1]);
 
   } else if (parts = functionKeyCodeRe.exec(s)) {
+
     // ansi escape sequence
 
     // reassemble the key code leaving out leading \x1b's,
@@ -118,7 +142,6 @@ function emitKey(stream, s) {
     key.meta = !!(modifier & 10);
     key.shift = !!(modifier & 1);
     key.code = code;
-
     // Parse the key itself
     switch (code) {
       /* xterm/gnome ESC O letter */
@@ -217,6 +240,7 @@ function emitKey(stream, s) {
 
     }
   } else if (s.length > 1 && s[0] !== '\x1b') {
+
     // Got a longer-than-one string of characters.
     // Probably a paste, since it wasn't a control sequence.
     Array.prototype.forEach.call(s, function(c) {

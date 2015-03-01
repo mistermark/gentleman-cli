@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+
+var inquirer = require('inquirer');
+
+var options = {
+    type: "input",
+    name: "ret",
+    message: 'MESSAGE'
+};
+
+inquirer.prompt(options, function(answers) {
+  // console.log('*********', answers)
+  process.stdout.write(answers.ret);
+});
