@@ -1,6 +1,6 @@
 {
   "name": "gentleman",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Managing your HTPC media files from the command line. Like a true gentleman.",
   "main": "./bin/gentleman.js",
   "bin": {
