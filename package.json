@@ -1,6 +1,6 @@
 {
   "name": "gentleman",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Managing your HTPC media files from the command line. Like a true gentleman.",
   "main": "./bin/gentleman.js",
   "bin": {
@@ -12,7 +12,7 @@
   "preferGlobal": "true",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mistermark/file-manager.git"
+    "url": "https://github.com/mistermark/gentleman.git"
   },
   "keywords": [
     "files",
@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/mistermark/gentleman/issues"
   },
-  "homepage": "https://github.com/mistermark/file-manager",
+  "homepage": "https://github.com/mistermark/gentleman",
   "dependencies": {
     "chalk": "^1.0.0",
     "cli-color": "^0.3.2",
