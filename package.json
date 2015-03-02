@@ -1,13 +1,13 @@
 {
-  "name": "dapper-media-manager",
+  "name": "gentleman",
   "version": "0.0.1",
-  "description": "Managing media files from the command line. Like a dapperman.",
-  "main": "./bin/index.js",
+  "description": "Managing your HTPC media files from the command line. Like a true gentleman.",
+  "main": "./bin/gentleman.js",
   "bin": {
-    "dfiles": "bin/dfiles.js"
+    "gman": "bin/gentleman.js"
   },
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha -R dot test/dfiles.js"
+    "test": "node node_modules/mocha/bin/mocha -R dot test/gentleman.js"
   },
   "preferGlobal": "true",
   "repository": {
@@ -22,7 +22,7 @@
   "author": "Mark de Jong",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mistermark/file-manager/issues"
+    "url": "https://github.com/mistermark/gentleman/issues"
   },
   "homepage": "https://github.com/mistermark/file-manager",
   "dependencies": {
@@ -34,6 +34,7 @@
     "mkdirp": "^0.5.0",
     "nconf": "^0.7.1",
     "osenv": "^0.1.0",
+    "rimraf": "^2.2.8",
     "underscore": "^1.8.2"
   },
   "devDependencies": {

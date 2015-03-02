@@ -26,8 +26,8 @@ program
     .on('--help', function() {
         console.log('  Examples:');
         console.log('');
-        console.log('    $ dfiles delete movies');
-        // console.log('    $ dfiles move series'); //@TODO: 
+        console.log('    $ gentleman delete movies');
+        // console.log('    $ gentleman move series'); //@TODO:
         console.log('');
     });
 
@@ -94,7 +94,7 @@ program
     .on('--help', function() {
         console.log('  Example:');
         console.log('');
-        console.log('    $ dfiles set moviesDir /homes/dapper-user/Media/Movies');
+        console.log('    $ gentleman set moviesDir /homes/dapper-user/Media/Movies');
         console.log('');
     })
     .action(function(setting, value, options){

@@ -1,15 +1,11 @@
-// var should = require('chai').should(),
-//     dfiles = require('../bin/dfiles'),
-//     escape = scapegoat.escape,
-//     unescape = scapegoat.unescape;
 
 var spawn = require('child_process').spawn;
 
-describe('dfiles', function() {
+describe('gentleman', function() {
 
     it('should look for a target directory', function(done) {
 
-        var exec = spawn('dfiles', ["delete", "movies"]);
+        var exec = spawn('gentleman', ["delete", "movies"]);
 
         exec.stdout.on('data', function(chunk) {
             emitKey(exec.stdin, 'down');
