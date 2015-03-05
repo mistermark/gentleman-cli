@@ -2,12 +2,14 @@
   "name": "gentleman",
   "version": "0.0.3",
   "description": "Managing your HTPC media files from the command line. Like a true gentleman.",
-  "main": "./bin/gentleman.js",
+  "main": "./bin/gentleman",
   "bin": {
-    "gman": "bin/gentleman.js"
+    "gentleman": "bin/gentleman",
+    "gman": "bin/gentleman"
   },
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha -R dot test/gentleman.js"
+    "test": "node node_modules/mocha/bin/mocha -R dot test/gentleman.js",
+    "start": "./bin/gentleman config"
   },
   "preferGlobal": "true",
   "repository": {
