@@ -15,6 +15,7 @@ var notify      = require('../lib/notify');
 var first       = require('../lib/first');
 var remove      = require('../lib/remove');
 var messages    = require('../lib/messages');
+var welcome     = require('../lib/welcome');
 
 
 /**
@@ -37,13 +38,13 @@ program
  * Catch all the other commands
  */
 
-program
-    .command('*')
-    .description('Testing global function')
-    // .option("-m, --mode", "Mode to use: single/multiple")
-    .action(function(type, options){
-        console.log("Global trigger");
-    });
+// program
+//     .command('*')
+//     .description('Testing global function')
+//     // .option("-m, --mode", "Mode to use: single/multiple")
+//     .action(function(type, options){
+//         console.log("Global trigger");
+//     });
 
 
 /**
@@ -115,7 +116,7 @@ program
 
 program
     .command('config [option] [value]')
-    .description('Set everything for the first time')
+    .description('Change basic configuration')
     .on('--help', function() {
         console.log('  Example:');
         console.log('');
@@ -126,11 +127,13 @@ program
     .action(function(option, value, env) {
 
         if(!option && !value) {
-            first.check();
+            first.check(function() {
+                console.log(notify.success('\n%s'), messages.strings.config.ready);
+            });
         } else {
-            //@TODO: Save modified options to config
-            console.log(option, ": ", value);
-            config.set(option, value);
+            config.set(option, value, function() {
+                console.log(notify.success('%s'), messages.strings.update_success);
+            });
         }
 
     });
@@ -139,3 +142,13 @@ program
  * Export all the 'program' commands
  */
 program.parse(process.argv);
+
+
+/**
+ * Handle no arguments
+ */
+if(!program.args.length) {
+    welcome.message();
+    program.outputHelp();
+    console.log(messages.strings.setup.info);
+}
