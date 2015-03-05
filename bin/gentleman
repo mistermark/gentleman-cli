@@ -1,19 +1,25 @@
 #!/usr/bin/env node
 
-var program     = require('commander'),
-    inquirer    = require('inquirer'),
-    osenv       = require('osenv');
+/**
+ * Module dependencies
+ */
 
-var config      = require('../lib/config'),
-    pkgjson     = require('../package.json'),
-    ls          = require('../lib/list'),
-    notify      = require('../lib/notify'),
-    first       = require('../lib/first'),
-    remove      = require('../lib/remove'),
-    messages    = require('../lib/messages');
+var program     = require('commander');
+var inquirer    = require('inquirer');
+var osenv       = require('osenv');
+
+var config      = require('../lib/config');
+var pkgjson     = require('../package.json');
+var ls          = require('../lib/list');
+var notify      = require('../lib/notify');
+var first       = require('../lib/first');
+var remove      = require('../lib/remove');
+var messages    = require('../lib/messages');
 
 
-// Basic information
+/**
+ * Basic information
+ */
 program
     .version(pkgjson.version)
     .description(pkgjson.description)
@@ -27,6 +33,10 @@ program
     });
 
 
+/**
+ * Catch all the other commands
+ */
+
 program
     .command('*')
     .description('Testing global function')
@@ -36,7 +46,10 @@ program
     });
 
 
-// Delete a media type
+/**
+ * Delete a media type
+ */
+
 program
     .command('delete [type]')
     .alias('del')
@@ -81,7 +94,10 @@ program
     });
 
 
-// Move a media type
+/**
+ * Move a media type
+ */
+
 // program
 //     .command('move [type]')
 //     .description('move a type of media')
@@ -92,7 +108,11 @@ program
 //         console.log('delete \'%s\' type using %s mode', env, mode);
 //     });
 
-//Set configuration
+
+/**
+ * Set basic configuration
+ */
+
 program
     .command('config [option] [value]')
     .description('Set everything for the first time')
@@ -105,21 +125,17 @@ program
     })
     .action(function(option, value, env) {
 
-        console.log(messages.ascii.bowtie32.join('\n'));
-        console.log('');
-        first.check(function(){
-            console.log(messages.strings.config.ready);
-        });
-
         if(!option && !value) {
             first.check();
         } else {
             //@TODO: Save modified options to config
-            console.log(option);
-            console.log(value);
+            console.log(option, ": ", value);
+            config.set(option, value);
         }
 
     });
 
-
+/**
+ * Export all the 'program' commands
+ */
 program.parse(process.argv);
