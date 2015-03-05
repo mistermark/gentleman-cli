@@ -2,52 +2,58 @@
 
 var program     = require('commander'),
     inquirer    = require('inquirer'),
-    osenv       = require('osenv'),
-    config      = require('../lib/config'),
+    osenv       = require('osenv');
+
+var config      = require('../lib/config'),
+    pkgjson     = require('../package.json'),
     ls          = require('../lib/list'),
     notify      = require('../lib/notify'),
     first       = require('../lib/first'),
-    remove      = require('../lib/remove');
+    remove      = require('../lib/remove'),
+    messages    = require('../lib/messages');
 
-
-var messages = require('../lib/messages');
-var firstRun = function() {
-    first.check(function(res) {
-        console.log(res);
-        if (res) return res;
-    });
-};
 
 // Basic information
 program
-    .version('0.0.1')
-    .description('Managing files from the directory the command is run from.')
-    .option("-D, --dryrun", "First check what gets deleted. Nothing is actually deleted.")
+    .version(pkgjson.version)
+    .description(pkgjson.description)
+    .option("-D, --dryrun", "First check what gets deleted. Nothing is deleted.")
     .on('--help', function() {
         console.log('  Examples:');
         console.log('');
         console.log('    $ gentleman delete movies');
-        // console.log('    $ gentleman move series'); //@TODO:
+        // console.log('    $ gentleman move series'); //@TODO: Implement moving of media
         console.log('');
+    });
+
+
+program
+    .command('*')
+    .description('Testing global function')
+    // .option("-m, --mode", "Mode to use: single/multiple")
+    .action(function(type, options){
+        console.log("Global trigger");
     });
 
 
 // Delete a media type
 program
     .command('delete [type]')
-    .description('delete a type of media')
+    .alias('del')
+    .description('Delete a type of media')
     // .option("-m, --mode", "Mode to use: single/multiple")
     .action(function(type, options){
 
         first.check(function() {
             var actionOptions = {
                 "src": config.get(type),
-                "dry": (program.dryrun === undefined ? 'false' : 'true')
+                "dry": (program.dryrun === undefined ? false : true)
             };
 
             ls.list(config.get(type), function(err, res) {
                 if(err) {
-                    console.error(notify.error(messages.errors[err.errno]));
+                    console.error(notify.error(messages.errors[err.code]));
+                    console.error(messages.strings.config.checkdirs);
                     process.exit();
                 }
 
@@ -86,21 +92,33 @@ program
 //         console.log('delete \'%s\' type using %s mode', env, mode);
 //     });
 
-
-// Modify config settings
+//Set configuration
 program
-    .command('set [setting] [value]')
-    .description('Set config options')
+    .command('config [option] [value]')
+    .description('Set everything for the first time')
     .on('--help', function() {
         console.log('  Example:');
         console.log('');
-        console.log('    $ gentleman set moviesDir /homes/dapper-user/Media/Movies');
+        console.log('    $ gentleman config');
+        console.log('    $ gentleman config moviesDir /homes/dapperuser/Media/Movies');
         console.log('');
     })
-    .action(function(setting, value, options){
-        first.check(function() {
-            config.set(setting, value);
+    .action(function(option, value, env) {
+
+        console.log(messages.ascii.bowtie32.join('\n'));
+        console.log('');
+        first.check(function(){
+            console.log(messages.strings.config.ready);
         });
+
+        if(!option && !value) {
+            first.check();
+        } else {
+            //@TODO: Save modified options to config
+            console.log(option);
+            console.log(value);
+        }
+
     });
 
 
