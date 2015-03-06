@@ -1,7 +1,7 @@
 {
   "name": "gentleman",
   "title": "Gentleman – HTPC Media Manager",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Managing your HTPC media files from the command line. Like a true gentleman.",
   "main": "./bin/gentleman",
   "bin": {
