@@ -91,14 +91,16 @@ The following directories/files were successfully deleted:
 
 When you have a directory with a whole bunch of files or folders, like a huge Media folder, you might want to purge it from some unwanted ones once in a while. For my own purpose I created this script to better manage my Media folder and clean it up once in a while from some old or outdates files.
 
-## Roadmap (a.k.a. Features I still need to do but didn't have the time for yet)
+## Roadmap
+### a.k.a. Features I still need to do but didn't have the time for yet
 
 - Moving files, instead of deleting them
 -- Renaming target file other than original filename
 - Improve configuration file structure
 - Add other media types to handle
 
-### Highway Roadmap (a.k.a. The Big Huge Wishlist for when I have too much time on my hands)
+### Highway Roadmap
+#### a.k.a. The Big Huge Wishlist for when I have too much time on my hands
 
 - Develop Gentleman API
 - Develop Gentleman Web UI
