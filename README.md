@@ -2,21 +2,23 @@
 
 A NodeJS setup to manage files with multi-select options
 
-# Installation
+## Installation
 
 `npm install -g gentleman`
 
-# Usage
+## Usage
 
-For now only the action `delete` is implemented. The next version will have `move` implemented as well. Handy when you want to move your files elsewhere instead of just deleting it.
+Handy when you want to move your files elsewhere instead of just deleting it.
+
+> NOTE: For now only the action `delete` is implemented. The next version will have `move` implemented as well.
 
 To delete your files:
 
 `gentleman delete [movies, series]`
 
-# How does it work
+## How does it work
 
-## First run (fresh install)
+### First run (fresh install)
 
 By running `gentleman delete [movies, series]` you will be presented with the chance to set up your directories to be saved in a configuration file stored in your user folder. On Mac and Linux computers this would be in `~/.gentleman/config.json`.
 
@@ -40,7 +42,7 @@ The last question you'll get is to set your TV Series directory. Same as above i
 ? Path to your TV Series directory: (/Users/dapperuser/Media/TV Series)
 ```
 
-## Deleting files/folders
+### Deleting files/folders
 
 Once you've got it all set up you can start deleting files.
 
@@ -85,20 +87,32 @@ The following directories/files were successfully deleted:
 - Quam Nullam Etiam → "/Users/dapperuser/Downloads/Temp_Media/Movies/Quam Nullam Etiam"
 ```
 
-# Why?
+## Why?
 
 When you have a directory with a whole bunch of files or folders, like a huge Media folder, you might want to purge it from some unwanted ones once in a while. For my own purpose I created this script to better manage my Media folder and clean it up once in a while from some old or outdates files.
 
-# Credits
+## Roadmap (a.k.a. Features I still need to do but didn't have the time for yet)
 
-## Contributors
+- Moving files, instead of deleting them
+-- Renaming target file other than original filename
+- Improve configuration file structure
+- Add other media types to handle
+
+### Highway Roadmap (a.k.a. The Big Huge Wishlist for when I have too much time on my hands)
+
+- Develop Gentleman API
+- Develop Gentleman Web UI
+
+## Credits
+
+### Contributors
 
 Mark de Jong <mark@markdejong.com>
 
-## Thanks & Credits
+### Thanks & Credits
 
 [Gabriele di Stefano](https://github.com/gabrieleds) for inspiring me to do more with NodeJS.
 
-## License
+### License
 
 [MIT License](https://github.com/mistermark/dapper-media-manager/blob/master/LICENSE)
