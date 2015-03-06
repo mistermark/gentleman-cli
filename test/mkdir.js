@@ -1,7 +1,14 @@
+/**
+ * Module dependencies
+ */
+
 var async = require('async');
 var mkdirp = require('mkdirp');
 
-//Dirs to create
+
+/**
+ * Test directories
+ */
 var dirs = [
     "temp/Movies/Ornare Vestibulum Adipiscing",
     "temp/Movies/Ornare Vestibulum Adipiscing/Elit Pellentesque",
@@ -24,6 +31,9 @@ var dirs = [
     "temp/TV_Series/Cursus Adipiscing Consectetur",
 ];
 
+/**
+ * Create the folders
+ */
 async.map(dirs, mkdirp, function(err) {
     if (err) {
         console.error(err);

@@ -1,0 +1,154 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies
+ */
+
+var program     = require('commander');
+var inquirer    = require('inquirer');
+var osenv       = require('osenv');
+
+var config      = require('../lib/config');
+var pkgjson     = require('../package.json');
+var ls          = require('../lib/list');
+var notify      = require('../lib/notify');
+var first       = require('../lib/first');
+var remove      = require('../lib/remove');
+var messages    = require('../lib/messages');
+var welcome     = require('../lib/welcome');
+
+
+/**
+ * Basic information
+ */
+program
+    .version(pkgjson.version)
+    .description(pkgjson.description)
+    .option("-D, --dryrun", "First check what gets deleted. Nothing is deleted.")
+    .on('--help', function() {
+        console.log('  Examples:');
+        console.log('');
+        console.log('    $ gentleman delete movies');
+        // console.log('    $ gentleman move series'); //@TODO: Implement moving of media
+        console.log('');
+    });
+
+
+/**
+ * Catch all the other commands
+ */
+
+// program
+//     .command('*')
+//     .description('Testing global function')
+//     // .option("-m, --mode", "Mode to use: single/multiple")
+//     .action(function(type, options){
+//         console.log("Global trigger");
+//     });
+
+
+/**
+ * Delete a media type
+ */
+
+program
+    .command('delete [type]')
+    .alias('del')
+    .description('Delete a type of media')
+    // .option("-m, --mode", "Mode to use: single/multiple")
+    .action(function(type, options){
+
+        first.check(function() {
+            var actionOptions = {
+                "src": config.get(type),
+                "dry": (program.dryrun === undefined ? false : true)
+            };
+
+            ls.list(config.get(type), function(err, res) {
+                if(err) {
+                    console.error(notify.error(messages.errors[err.code]));
+                    console.error(messages.strings.config.checkdirs);
+                    process.exit();
+                }
+
+                if(res.length < 1) {
+                    console.error(notify.error('%s'), messages.strings.empty_dir);
+                    process.exit();
+                }
+
+                var options = {
+                    type: "checkbox",
+                    name: "dirs",
+                    message: messages.strings.checkbox_choose,
+                    choices: res
+                };
+                inquirer.prompt(options, function(answers) {
+                    remove(answers.dirs, actionOptions, function(feedback) {
+                        console.log('%s', feedback);
+                    });
+                });
+
+            });
+
+        });
+
+    });
+
+
+/**
+ * Move a media type
+ */
+
+// program
+//     .command('move [type]')
+//     .description('move a type of media')
+//     .option("-m, --mode [mode]", "Mode to use: single/multiple")
+//     .action(function(env, options){
+//         var mode = options.mode || "single";
+//         env = env || 'all';
+//         console.log('delete \'%s\' type using %s mode', env, mode);
+//     });
+
+
+/**
+ * Set basic configuration
+ */
+
+program
+    .command('config [option] [value]')
+    .description('Change basic configuration')
+    .on('--help', function() {
+        console.log('  Example:');
+        console.log('');
+        console.log('    $ gentleman config');
+        console.log('    $ gentleman config moviesDir /homes/dapperuser/Media/Movies');
+        console.log('');
+    })
+    .action(function(option, value, env) {
+
+        if(!option && !value) {
+            first.check(function() {
+                console.log(notify.success('\n%s'), messages.strings.config.ready);
+            });
+        } else {
+            config.set(option, value, function() {
+                console.log(notify.success('%s'), messages.strings.update_success);
+            });
+        }
+
+    });
+
+/**
+ * Export all the 'program' commands
+ */
+program.parse(process.argv);
+
+
+/**
+ * Handle no arguments
+ */
+if(!program.args.length) {
+    welcome.message();
+    program.outputHelp();
+    console.log(messages.strings.setup.info);
+}
