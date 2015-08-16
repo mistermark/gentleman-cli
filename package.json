@@ -9,7 +9,7 @@
     "gman": "bin/gentleman"
   },
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha -R dot test/gentleman.js",
+    "test": "node node_modules/mocha/bin/mocha -R spec test/*.spec.js -w",
     "start": "./bin/gentleman config"
   },
   "preferGlobal": "true",
@@ -30,12 +30,17 @@
   },
   "homepage": "https://github.com/mistermark/gentleman",
   "dependencies": {
+    "body-parser": "^1.13.3",
     "chalk": "^1.0.0",
     "cli-color": "^0.3.2",
     "commander": "^2.6.0",
     "find-remove": "^0.2.5",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-nodemon": "^2.0.3",
     "inquirer": "^0.8.0",
     "lodash": "^3.3.1",
+    "log4js": "^0.6.26",
     "mkdirp": "^0.5.0",
     "nconf": "^0.7.1",
     "osenv": "^0.1.0",

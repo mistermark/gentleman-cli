@@ -1,7 +1,7 @@
 
 var spawn = require('child_process').spawn;
 
-describe('gentleman', function() {
+xdescribe('gentleman', function() {
 
     it('should look for a target directory', function(done) {
 
