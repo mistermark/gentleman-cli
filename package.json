@@ -10,7 +10,8 @@
   },
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha -R spec test/*.spec.js -w",
-    "start": "./bin/gentleman config"
+    "start": "./bin/gentleman config",
+    "postinstall": "bower install"
   },
   "preferGlobal": "true",
   "repository": {
@@ -34,6 +35,7 @@
     "chalk": "^1.0.0",
     "cli-color": "^0.3.2",
     "commander": "^2.6.0",
+    "express": "^4.13.3",
     "find-remove": "^0.2.5",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",

@@ -13,7 +13,8 @@ var fileTypes = [
   'html',
   'txt',
   'png',
-  'xml'
+  'xml',
+  'ico'
 ];
 
 //dirs allowed to ba accessed
