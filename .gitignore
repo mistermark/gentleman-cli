@@ -27,3 +27,6 @@ client/lib
 
 # Users Environment Variables
 .lock-wscript
+
+# Private information
+HOSTING.md
